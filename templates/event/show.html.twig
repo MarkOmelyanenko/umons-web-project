@@ -3,31 +3,37 @@
 {% block title %}Event: {{ event.title }}{% endblock %}
 
 {% block body %}
+<div class="container">
     {% for label, messages in app.flashes %}
-        <div class="flash-{{ label }}" style="padding: 1em; background-color: lightgreen; border: 1px solid green;">
+        <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
             {% for message in messages %}
-                <div>{{ message }}</div>
+                {{ message }}
             {% endfor %}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     {% endfor %}
 
-    <h1>{{ event.title }}</h1>
-    <p><strong>Start Date:</strong> {{ event.startAt|date('Y-m-d H:i') }}</p>
-    <p><strong>End Date:</strong> {{ event.endAt|date('Y-m-d H:i') }}</p>
-    <p><strong>Description:</strong> {{ event.description }}</p>
-    <p><strong>Participants:</strong>
-        {{ event.registrations|length }}
-        {% if event.maxParticipants %}
-            / {{ event.maxParticipants }}
-        {% else %}
-            (no limit)
-        {% endif %}
-    </p>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h1 class="card-title">{{ event.title }}</h1>
+            <p class="card-text"><strong>Start Date:</strong> {{ event.startAt|date('Y-m-d H:i') }}</p>
+            <p class="card-text"><strong>End Date:</strong> {{ event.endAt|date('Y-m-d H:i') }}</p>
+            <p class="card-text"><strong>Description:</strong> {{ event.description }}</p>
+            <p class="card-text"><strong>Participants:</strong>
+                {{ event.registrations|length }}
+                {% if event.maxParticipants %}
+                    / {{ event.maxParticipants }}
+                {% else %}
+                    (no limit)
+                {% endif %}
+            </p>
 
-    {% if app.user %}
-        <a href="{{ path('event_join', {id: event.id}) }}" class="btn btn-primary">Join</a>
-    {% else %}
-        <p><a href="{{ path('app_login') }}">Log in</a> to join this event.</p>
-    {% endif %}
-
+            {% if app.user %}
+                <a href="{{ path('event_join', {id: event.id}) }}" class="btn btn-primary">Join</a>
+            {% else %}
+                <p><a href="{{ path('app_login') }}">Log in</a> to join this event.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}
