@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Event: {{ event.title }}{% endblock %}
+
+{% block body %}
+    {% for label, messages in app.flashes %}
+        <div class="flash-{{ label }}" style="padding: 1em; background-color: lightgreen; border: 1px solid green;">
+            {% for message in messages %}
+                <div>{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    
+    <h1>{{ event.title }}</h1>
+    <p><strong>Start Date:</strong> {{ event.startAt|date('Y-m-d H:i') }}</p>
+    <p><strong>End Date:</strong> {{ event.endAt|date('Y-m-d H:i') }}</p>
+    <p><strong>Description:</strong> {{ event.description }}</p>
+
+    {% if app.user %}
+        <a href="{{ path('event_join', {id: event.id}) }}" class="btn btn-primary">Join</a>
+    {% else %}
+        <p><a href="{{ path('app_login') }}">Log in</a> to join this event.</p>
+    {% endif %}
+{% endblock %}
