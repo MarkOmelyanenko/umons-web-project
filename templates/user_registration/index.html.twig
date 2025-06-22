@@ -3,18 +3,16 @@
 {% block title %}Hello UserRegistrationController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Users/markomelyanenko/Desktop/karate-club/src/Controller/UserRegistrationController.php</code></li>
-        <li>Your template at <code>/Users/markomelyanenko/Desktop/karate-club/templates/user_registration/index.html.twig</code></li>
-    </ul>
+<div class="container">
+    <div class="card mt-4">
+        <div class="card-body">
+            <h1 class="card-title">Hello {{ controller_name }}! ✅</h1>
+            <p class="card-text">This friendly message is coming from:</p>
+            <ul class="mb-0">
+                <li>Your controller at <code>src/Controller/UserRegistrationController.php</code></li>
+                <li>Your template at <code>templates/user_registration/index.html.twig</code></li>
+            </ul>
+        </div>
+    </div>
 </div>
 {% endblock %}

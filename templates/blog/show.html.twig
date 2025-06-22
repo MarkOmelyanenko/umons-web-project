@@ -3,11 +3,17 @@
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block body %}
-<h1>{{ post.title }}</h1>
-<p><em>by {{ post.author }} on {{ post.createdAt|date('Y-m-d H:i') }}</em></p>
-{% if post.imageUrl %}
-    <img src="{{ post.imageUrl }}" class="img-fluid my-3">
-{% endif %}
-<p>{{ post.content }}</p>
-<a href="{{ path('blog_index') }}">← Back to Blog</a>
+<div class="container">
+    <div class="card mb-4 shadow-sm">
+        {% if post.imageUrl %}
+            <img src="{{ post.imageUrl }}" class="card-img-top" alt="">
+        {% endif %}
+        <div class="card-body">
+            <h1 class="card-title">{{ post.title }}</h1>
+            <p class="text-muted">by {{ post.author }} on {{ post.createdAt|date('Y-m-d H:i') }}</p>
+            <p class="card-text">{{ post.content }}</p>
+            <a href="{{ path('blog_index') }}" class="btn btn-outline-secondary">← Back to Blog</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
