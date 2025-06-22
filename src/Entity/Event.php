@@ -34,6 +34,9 @@ class Event
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $maxParticipants = null;
+
     /**
      * @var Collection<int, Registration>
      */
@@ -43,6 +46,17 @@ class Event
     public function __construct()
     {
         $this->registrations = new ArrayCollection();
+    }
+
+    public function getMaxParticipants(): ?int
+    {
+        return $this->maxParticipants;
+    }
+
+    public function setMaxParticipants(?int $max): static
+    {
+        $this->maxParticipants = $max;
+        return $this;
     }
 
     public function getId(): ?int

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Our Club{% endblock %}
+
+{% block body %}
+<h1 class="mb-4">Welcome to Our Karate Club</h1>
+
+<p class="lead">Take a look inside our training space, atmosphere, and club life!</p>
+
+<h3 class="mt-5">📍 Our Dojo</h3>
+<div class="row mb-5">
+    <div class="col-md-6">
+        <p>
+            Stryi, Lviv Oblast, Ukraine, 82401
+        </p>
+        <p>
+            Located in the heart of the city, our dojo is equipped with all necessary martial arts gear,
+            mats, a clean locker room, and a family-friendly environment.
+        </p>
+        <ul>
+            <li>🧼 Modern changing rooms</li>
+            <li>🥋 Traditional tatami mats</li>
+            <li>🥇 Trophy display</li>
+            <li>👨‍👩‍👧 Classes for all ages</li>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <img src="{{ asset('images/about/building.png') }}" class="img-fluid rounded" alt="Dojo">
+    </div>
+</div>
+
+<h3 class="mt-5">📸 Club Life</h3>
+<div class="row g-4">
+    <div class="col-md-4">
+        <img src="{{ asset('images/about/about1.png') }}" class="img-fluid rounded shadow-sm" alt="Club photo">
+    </div>
+    <div class="col-md-4">
+        <img src="{{ asset('images/about/about2.png') }}" class="img-fluid rounded shadow-sm" alt="Club photo">
+    </div>
+    <div class="col-md-4">
+        <img src="{{ asset('images/about/about3.png') }}" class="img-fluid rounded shadow-sm" alt="Club photo">
+    </div>
+    <div class="col-md-4">
+        <img src="{{ asset('images/about/about4.png') }}" class="img-fluid rounded shadow-sm" alt="Club photo">
+    </div>
+</div>
+{% endblock %}

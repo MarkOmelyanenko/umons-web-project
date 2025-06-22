@@ -10,15 +10,24 @@
             {% endfor %}
         </div>
     {% endfor %}
-    
+
     <h1>{{ event.title }}</h1>
     <p><strong>Start Date:</strong> {{ event.startAt|date('Y-m-d H:i') }}</p>
     <p><strong>End Date:</strong> {{ event.endAt|date('Y-m-d H:i') }}</p>
     <p><strong>Description:</strong> {{ event.description }}</p>
+    <p><strong>Participants:</strong>
+        {{ event.registrations|length }}
+        {% if event.maxParticipants %}
+            / {{ event.maxParticipants }}
+        {% else %}
+            (no limit)
+        {% endif %}
+    </p>
 
     {% if app.user %}
         <a href="{{ path('event_join', {id: event.id}) }}" class="btn btn-primary">Join</a>
     {% else %}
         <p><a href="{{ path('app_login') }}">Log in</a> to join this event.</p>
     {% endif %}
+
 {% endblock %}

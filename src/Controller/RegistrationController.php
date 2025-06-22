@@ -27,6 +27,14 @@ class RegistrationController extends AbstractController
             }
         }
 
+        if (
+            $event->getMaxParticipants() !== null &&
+            $event->getRegistrations()->count() >= $event->getMaxParticipants()
+        ) {
+            $this->addFlash('warning', 'This event is already full.');
+            return $this->redirectToRoute('event_show', ['id' => $event->getId()]);
+        }
+
         // creating a new registration
         $registration = new Registration();
         $registration->setEvent($event);
@@ -50,5 +58,26 @@ class RegistrationController extends AbstractController
         return $this->render('event/my_events.html.twig', [
             'registrations' => $registrations,
         ]);
+    }
+
+    #[Route('/event/{id}/unregister', name: 'event_unregister')]
+    #[IsGranted('ROLE_USER')]
+    public function unregister(Event $event, EntityManagerInterface $em): RedirectResponse
+    {
+        $user = $this->getUser();
+        $registration = $em->getRepository(Registration::class)->findOneBy([
+            'event' => $event,
+            'user' => $user,
+        ]);
+
+        if (!$registration) {
+            $this->addFlash('warning', 'You are not registered for this event.');
+        } else {
+            $em->remove($registration);
+            $em->flush();
+            $this->addFlash('success', 'You have successfully unregistered from the event.');
+        }
+
+        return $this->redirectToRoute('my_events');
     }
 }

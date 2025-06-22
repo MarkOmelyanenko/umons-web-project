@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Events{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="mb-4">My Registered Events</h1>
+
+        {% if registrations is empty %}
+            <div class="alert alert-info">
+                You are not registered for any events yet.
+            </div>
+        {% else %}
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                {% for registration in registrations %}
+                    <div class="col">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ registration.event.title }}</h5>
+                                <p class="card-text">
+                                    <strong>Date:</strong> {{ registration.event.startAt|date('Y-m-d H:i') }}<br>
+                                    <strong>Location:</strong> {{ registration.event.location }}<br>
+                                    <strong>Description:</strong> {{ registration.event.description|slice(0, 100) }}...
+                                </p>
+                                <p class="card-text">
+                                    <strong>Participants:</strong>
+                                    {{ registration.event.registrations|length }}
+                                        {% if registration.event.maxParticipants %}
+                                            / {{ registration.event.maxParticipants }}
+                                        {% else %}
+                                            (no limit)
+                                        {% endif %}
+                                </p>
+                                <a href="{{ path('event_show', { id: registration.event.id }) }}" class="btn btn-primary">
+                                    View Details
+                                </a>
+                                <a href="{{ path('event_unregister', { id: registration.event.id }) }}" 
+                                    class="btn btn-outline-danger ms-2"
+                                    onclick="return confirm('Are you sure you want to unregister?');">
+                                    Unregister
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

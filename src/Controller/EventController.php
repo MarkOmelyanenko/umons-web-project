@@ -15,8 +15,18 @@ class EventController extends AbstractController
     {
         $events = $eventRepository->findAll();
 
+        $calendarEvents = array_map(function (Event $event) {
+            return [
+                'title' => $event->getTitle(),
+                'start' => $event->getStartAt()->format('Y-m-d\TH:i:s'),
+                'end' => $event->getEndAt()->format('Y-m-d\TH:i:s'),
+                'url' => '/event/' . $event->getId(),
+            ];
+        }, $events);
+
         return $this->render('event/index.html.twig', [
             'events' => $events,
+            'calendarEvents' => $calendarEvents,
         ]);
     }
 

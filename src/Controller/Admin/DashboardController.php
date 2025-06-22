@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Entity\User;
 use App\Entity\Event;
 use App\Entity\Registration;
+use App\Entity\Coach;
+use App\Entity\BlogPost;
 
 #[AdminDashboard(routePath: '/admin', routeName: 'admin')]
 class DashboardController extends AbstractDashboardController
@@ -37,6 +39,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Users', 'fas fa-users', User::class);
         yield MenuItem::linkToCrud('Events', 'fas fa-calendar', Event::class);
         yield MenuItem::linkToCrud('Registrations', 'fas fa-check-circle', Registration::class);
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        yield MenuItem::linkToCrud('Coaches', 'fas fa-users', Coach::class);
+        yield MenuItem::linkToCrud('Blog Posts', 'fas fa-newspaper', BlogPost::class);
     }
 }

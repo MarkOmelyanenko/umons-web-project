@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use Doctrine\ORM\EntityManagerInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 
 class EventCrudController extends AbstractCrudController
 {
@@ -31,6 +32,7 @@ class EventCrudController extends AbstractCrudController
             TextField::new('title'),
             TextField::new('location'),
             TextareaField::new('description'),
+            IntegerField::new('maxParticipants'),
             DateTimeField::new('startAt')->setFormat('short'),
             DateTimeField::new('endAt')->setFormat('short'),
         ];
