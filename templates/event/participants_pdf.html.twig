@@ -1,0 +1,22 @@
+<h2>Participants for {{ event.title }}</h2>
+<p><strong>Date:</strong> {{ event.startAt|date('Y-m-d H:i') }}</p>
+<table border="1" cellspacing="0" cellpadding="5" width="100%">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Registered At</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for registration in participants %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ registration.user.fullName }}</td>
+                <td>{{ registration.user.email }}</td>
+                <td>{{ registration.registeredAt|date('Y-m-d H:i') }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

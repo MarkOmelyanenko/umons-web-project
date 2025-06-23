@@ -11,6 +11,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class EventCrudController extends AbstractCrudController
 {
@@ -36,6 +40,20 @@ class EventCrudController extends AbstractCrudController
             DateTimeField::new('startAt')->setFormat('short'),
             DateTimeField::new('endAt')->setFormat('short'),
         ];
+    }
+
+
+    public function configureActions(Actions $actions): Actions
+    {
+        $exportPdf = Action::new('export_pdf', 'Export Participants PDF')
+            ->linkToUrl(function (Event $event) {
+                return $this->generateUrl('admin_event_export_pdf', ['id' => $event->getId()]);
+            })
+            ->setCssClass('btn btn-info');
+
+        return $actions
+            ->add('detail', $exportPdf)
+            ->add('index', Action::DETAIL);
     }
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
