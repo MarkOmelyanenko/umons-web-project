@@ -18,12 +18,7 @@ This repository contains a Symfony application used to manage a karate club webs
    composer install
    ```
 
-3. Copy the example environment file and adjust the database credentials:
-
-   ```bash
-   cp .env .env.local
-   # then edit .env.local and set DATABASE_URL
-   ```
+3. Adjust the database credentials in .env.
 
 4. Create the database and run the migrations:
 
